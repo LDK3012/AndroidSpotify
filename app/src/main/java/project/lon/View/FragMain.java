@@ -33,7 +33,7 @@ public class FragMain extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
-    String urlDefault = "https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon";
+    String urlDefault = "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class FragMain extends Fragment {
             }
         }
 //        setAvatar();
-        Picasso.get().load(urlDefault).into(imgAvatar);
+        Picasso.get().load(urlDefault.toString()).into(imgAvatar);
         return view;
     }
 
