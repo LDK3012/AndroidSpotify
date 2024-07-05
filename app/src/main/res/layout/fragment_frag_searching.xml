@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".View.FragSearching">
+
+    <FrameLayout
+        android:id="@+id/searchFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="100dp"
+                    app:cardElevation="5dp">
+
+                    <ImageButton
+                        android:id="@+id/imgAvatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center_vertical"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:text="Searching"
+                    android:textColor="#188106"
+                    android:textSize="20dp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/border">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/search" />
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15dp"
+                    android:background="@null"
+                    android:hint="What do you want to hear?" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lstMusic"
+                android:layout_width="match_parent"
+                android:layout_height="605dp"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

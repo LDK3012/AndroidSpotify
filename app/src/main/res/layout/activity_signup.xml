@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/signinbackground"
+    android:layout_gravity="center"
+    tools:context=".View.Signup_Activity">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="350px"
+        android:layout_height="250px"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/edt_img" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="#000000"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Đăng kí để bắt đầu nghe"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                />
+
+            <EditText
+                android:id="@+id/edt_Signup_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/customer_edittext"
+                android:hint="Tên"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="#423C3C"
+                android:drawableLeft="@drawable/baseline_person_24"
+                android:drawablePadding="8dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edt_signup_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/customer_edittext"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="#423C3C"
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edt_signup_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/customer_edittext"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="#423C3C"
+                android:drawableLeft="@drawable/baseline_person_pin_24"
+                android:drawablePadding="8dp"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edt_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/customer_edittext"
+                android:hint="Nhập lại mật khẩu"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="#423C3C"
+                android:drawableLeft="@drawable/baseline_check_circle_24"
+                android:drawablePadding="8dp"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/btn_Signup_Step0"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/btn_login"
+                android:textStyle="bold"
+                app:backgroundTint="@null"
+                android:padding="8dp"
+                android:text="Tiếp theo"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginRedirectText"
+                android:text="Bạn đã có tài khoản? Đăng nhập"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/white"
+                />
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+</LinearLayout>

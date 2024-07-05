@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/black"
+    tools:context=".View.MainActivity">
+
+
+    <ImageView
+        android:id="@+id/img_music"
+        android:layout_width="350px"
+        android:layout_height="250px"
+
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/edt_img" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="500px"
+        android:layout_height="80px"
+        android:textSize="50px"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="10px"
+        android:text="Đăng nhập vào Music" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_LoginGoogle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_gg_sdt"
+            android:drawableLeft="@drawable/icon_gg"
+            android:text="Tiếp tục bằng Google"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/layout_item_whiteline"
+     />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edt_Login_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/customer_edittext"
+            android:ems="15"
+            android:hint="Email"
+            android:paddingLeft="12dp"
+            android:textColorHint="#653D3D"
+            android:textSize="15dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_Login_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customer_edittext"
+            android:drawableRight="@drawable/baseline_visibility_off_24"
+            android:ems="15"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:longClickable="false"
+            android:paddingLeft="12dp"
+            android:paddingRight="20dp"
+            android:textSize="15dp"
+            android:textColorHint="#653D3D"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_forgetpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Quên mật khẩu của bạn?"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btn_Login"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50px"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_login"
+            android:text="Đăng Nhập"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_width="800px"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="5dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="10dp"-->
+
+
+<!--        app:boxStrokeWidth="0dp"-->
+<!--        app:boxStrokeWidthFocused="0dp"-->
+<!--        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--        app:hintTextColor="@color/colorgrey"-->
+
+<!--        app:passwordToggleDrawable="@drawable/hide_see_pass"-->
+<!--        app:passwordToggleEnabled="true"-->
+<!--        app:passwordToggleTint="@color/black"-->
+<!--        >-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/edt_Login_pass"-->
+<!--            android:layout_width="800px"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/customer_edittext"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Password"-->
+<!--            android:imeOptions="actionDone"-->
+<!--            android:inputType="textPassword"-->
+
+<!--            android:textSize="18sp"-->
+<!--             />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <include
+        layout="@layout/layout_item_whiteline"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:text="Bạn chưa có tài khoản?"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_Signup"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:text="Đăng kí"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</LinearLayout>

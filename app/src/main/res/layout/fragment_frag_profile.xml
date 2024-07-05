@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".View.FragProfile">
+
+    <FrameLayout
+        android:id="@+id/profileFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="5dp">
+
+                    <ImageView
+                        android:id="@+id/imgAvatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên người dùng: "
+                        android:textSize="15dp"
+                        android:textColor="#188106">
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Duy Khang"
+                        android:textSize="20dp"
+                        android:textColor="#188106">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnEdtProfile"
+                android:layout_width="101dp"
+                android:layout_height="37dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/edit_button_border"
+                android:padding="5dp"
+                android:text="Chỉnh sửa"
+                android:textAllCaps="false"
+                android:textColor="@color/white">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="30dp"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Hoạt động gần đây" />
+
+            <ListView
+                android:id="@+id/lstActivity"
+                android:layout_width="match_parent"
+                android:layout_height="368dp">
+
+            </ListView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogout"
+                    android:layout_width="101dp"
+                    android:layout_height="37dp"
+                    android:background="@drawable/edit_button_border"
+                    android:padding="5dp"
+                    android:text="Đăng xuất"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

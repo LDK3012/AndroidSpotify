@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+    tools:context=".View.Reset_mail">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="400px"
+        android:layout_height="80px"
+        android:textSize="50px"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:text="Email Reset" />
+    <Button
+        android:id="@+id/btn_Back_login"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60px"
+        android:background="@drawable/btn_login"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        android:text="Back to login"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+</LinearLayout>

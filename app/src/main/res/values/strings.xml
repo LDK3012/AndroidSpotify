@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">long.207pm27448</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id" translatable="false">
+        724824383300-qf5frk1sbq2m5n4dqot2fp4ekkd51ro8.apps.googleusercontent.com
+    </string>
+</resources>
