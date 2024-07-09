@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_Signup;
     private Boolean passwordVisibility = false;
     FirebaseAuth mAuth, pAuth;
-
     FirebaseDatabase database, mDatabase;
     GoogleSignInClient googleSignInClient;
+    String email,password;
     int RC_SIGN_IN = 20;
 
     @Override
@@ -231,47 +231,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkUser() {
-        String userUsername = edt_Login_username.getText().toString().trim();
-        String userPassword = edt_Login_pass.getText().toString().trim();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child("Email");
-        Query checkUserDatabase = reference.orderByChild("email").equalTo(userUsername);
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                        String passwordFromDb = userSnapshot.child("password").getValue(String.class);
-                        if (passwordFromDb != null && passwordFromDb.equals(userPassword)) {
-                            // Lưu tên người dùng vào SharedPreferences
-                            String name = userSnapshot.child("name").getValue(String.class);
-                            SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("name", name);
-                            editor.apply();
-
-                            // Cập nhật trạng thái đăng nhập
-                            SharedPreferences statusPrefs = getSharedPreferences("status_login", MODE_PRIVATE);
-                            SharedPreferences.Editor statusEditor = statusPrefs.edit();
-                            statusEditor.putString("name", "true");
-                            statusEditor.apply();
-
-                            Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);
-                            startActivity(intent);
-                            Toast.makeText(MainActivity.this, "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                if (snapshot.exists()){
+                    mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                SharedPreferences sharedPreferences = getSharedPreferences("status_login",MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("name", "true");
+                                editor.apply();
+                                //
+                                Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(MainActivity.this, "Email hoặc Mật khẩu sai", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
+
+                    });
                 } else {
-                    Toast.makeText(MainActivity.this, "Người dùng không tồn tại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Email hoặc Mật khẩu sai", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Something wrong happened", Toast.LENGTH_SHORT).show();
             }
         });
+
+        }
     }
-}

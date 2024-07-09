@@ -3,10 +3,9 @@ package project.lon.View;
 public class UserHelper {
     String name, email, password, profile;
 
-    public UserHelper(String name, String email, String password, String profile) {
+    public UserHelper(String name, String email, String profile) {
         this.name = name;
         this.email = email;
-        this.password = password;
         this.profile = profile;
         ;
 
@@ -26,15 +25,6 @@ public class UserHelper {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String profile) {
-        this.password = password;
     }
 
     public String getProfile() {

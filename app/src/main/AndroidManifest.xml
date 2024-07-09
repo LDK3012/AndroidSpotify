@@ -22,9 +22,6 @@
             android:name=".View.Main_DesignMusic"
             android:exported="false" />
         <activity
-            android:name=".View.Reset_mail"
-            android:exported="false" />
-        <activity
             android:name=".View.Reset_password"
             android:exported="false" />
         <activity

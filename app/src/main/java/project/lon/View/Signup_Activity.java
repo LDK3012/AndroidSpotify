@@ -84,7 +84,6 @@ public class Signup_Activity extends AppCompatActivity {
                 }
                 String email = edtMail.getText().toString();
                 String password = edtConfirmpassword.getText().toString();
-
                 validateDataAndRegister(email, password);
             }
         });
@@ -210,11 +209,10 @@ public class Signup_Activity extends AppCompatActivity {
                     if (user.isEmailVerified()) {
                         String name = edtName.getText().toString();
                         String email = edtMail.getText().toString();
-                        String password = edtConfirmpassword.getText().toString();
                         String profile = "https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon";
                         sDatabase = FirebaseDatabase.getInstance();
                         sReference = sDatabase.getReference("users").child("Email");
-                        UserHelper userClass = new UserHelper(name, email, password, profile);
+                        UserHelper userClass = new UserHelper(name, email, profile);
                         sReference.child(user.getUid()).setValue(userClass);
                         Intent intent = new Intent(Signup_Activity.this, MainActivity.class);
                         startActivity(intent);

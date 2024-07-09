@@ -28,8 +28,7 @@ Button btn_Send_Link;
         btn_Send_Link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Reset_password.this, Reset_mail.class);
-                startActivity(intent);
+
             }
         });
     }
