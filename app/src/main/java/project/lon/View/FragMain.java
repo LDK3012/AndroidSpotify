@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +63,7 @@ public class FragMain extends Fragment {
         }
         addEvents();
         setAvatar();
-        Picasso.get().load(urlDefault.toString()).into(imgAvatar);
+        //Picasso.get().load(urlDefault.toString()).into(imgAvatar);
         return view;
     }
 
@@ -78,6 +79,8 @@ public class FragMain extends Fragment {
                     break;
                 }
             }
+        }else{
+            Toast.makeText(getActivity(), "user null", Toast.LENGTH_SHORT).show();
         }
 
         if (isGoogle) {
