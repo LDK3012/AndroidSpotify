@@ -42,7 +42,7 @@ import project.lon.R;
 public class MainActivity extends AppCompatActivity {
     EditText edt_Login_username, edt_Login_pass;
     Button btn_Login_Google, btn_Login;
-    TextView tv_Signup;
+    TextView tv_Signup, txtForgotPassword;
     private Boolean passwordVisibility = false;
     FirebaseAuth mAuth, pAuth;
     FirebaseDatabase database, mDatabase;
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         edt_Login_pass = findViewById(R.id.edt_Login_pass);
         tv_Signup = findViewById(R.id.tv_Signup);
         btn_Login = findViewById(R.id.btn_Login);
-
+        txtForgotPassword = findViewById(R.id.txtForgotpassword);
     }
 
     private void addEvents() {
@@ -196,10 +196,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tv_Signup.setOnClickListener(new View.OnClickListener() {
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Signup_Activity.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Reset_password.class);
                 startActivity(intent);
             }
         });
