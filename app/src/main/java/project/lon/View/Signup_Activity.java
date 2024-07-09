@@ -154,7 +154,6 @@ public class Signup_Activity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 if (e instanceof FirebaseAuthUserCollisionException){
-                    //
                     if (firebaseAuth.getCurrentUser() != null && firebaseAuth.getCurrentUser().getProviderData() != null){
                         for (UserInfo userInfo : firebaseAuth.getCurrentUser().getProviderData()){
                             if (EmailAuthProvider.PROVIDER_ID.equals(userInfo.getProviderId())){
