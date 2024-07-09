@@ -94,27 +94,22 @@
             <ListView
                 android:id="@+id/lstActivity"
                 android:layout_width="match_parent"
-                android:layout_height="368dp">
+                android:layout_height="306dp">
 
             </ListView>
 
-            <LinearLayout
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_button_border"
                 android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLogout"
-                    android:layout_width="101dp"
-                    android:layout_height="37dp"
-                    android:background="@drawable/edit_button_border"
-                    android:padding="5dp"
-                    android:text="Đăng xuất"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
-            </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:text="Đăng xuất"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
 
         </LinearLayout>
 
