@@ -125,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
                             map.put("profile", user.getPhotoUrl().toString());
                             database.getReference().child("users").child("Google").child(user.getUid()).setValue(map);
                             //
+                            SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("name", user.getDisplayName());
+                            editor.apply();
+                            //
                             Toast.makeText(getApplicationContext(),"Đăng nhập thành công", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);
                             startActivity(intent);
@@ -237,16 +242,23 @@ public class MainActivity extends AppCompatActivity {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         String passwordFromDb = userSnapshot.child("password").getValue(String.class);
                         if (passwordFromDb != null && passwordFromDb.equals(userPassword)) {
-                            //
-                            SharedPreferences sharedPreferences = getSharedPreferences("status_login" , MODE_PRIVATE) ;
-                            SharedPreferences.Editor editor = sharedPreferences.edit()  ;
-                            editor.putString("name", "true") ;
+                            // Lưu tên người dùng vào SharedPreferences
+                            String name = userSnapshot.child("name").getValue(String.class);
+                            SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("name", name);
                             editor.apply();
-                            //
+
+                            // Cập nhật trạng thái đăng nhập
+                            SharedPreferences statusPrefs = getSharedPreferences("status_login", MODE_PRIVATE);
+                            SharedPreferences.Editor statusEditor = statusPrefs.edit();
+                            statusEditor.putString("name", "true");
+                            statusEditor.apply();
+
                             Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);
                             startActivity(intent);
                             Toast.makeText(MainActivity.this, "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
-                            finish(); // Optional: Finish the current activity
+                            finish();
                         } else {
                             Toast.makeText(MainActivity.this, "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
                         }
@@ -258,7 +270,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle database error
                 Toast.makeText(MainActivity.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

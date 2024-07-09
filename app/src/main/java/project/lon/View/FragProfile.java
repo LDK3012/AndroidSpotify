@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -27,12 +34,11 @@ import project.lon.View.EditProfile;
 
 
 public class FragProfile extends Fragment {
-
+    TextView txtUsername;
     ActionBar actionBar;
     BottomNavigationView btnNav;
     ListView lstView;
     Button btnEditProfile, btnLogout;
-
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -50,7 +56,14 @@ public class FragProfile extends Fragment {
         lstView = view.findViewById(R.id.lstActivity);
         btnEditProfile = view.findViewById(R.id.btnEdtProfile);
         btnLogout = view.findViewById(R.id.btnLogout);
+        txtUsername = view.findViewById(R.id.txtUsername);
         firebaseAuth = FirebaseAuth.getInstance();
+        //
+        // Lấy tên người dùng từ SharedPreferences
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("name", "Chưa có tên");
+        txtUsername.setText(username);
+        //
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
             actionBar = activity.getSupportActionBar();
@@ -87,11 +100,17 @@ public class FragProfile extends Fragment {
                         editor.putString("name", "false");
                         editor.apply();
                         //
-                        firebaseAuth.signOut();
+                        FirebaseAuth.getInstance().signOut();
+                        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), GoogleSignInOptions.DEFAULT_SIGN_IN);
+                        mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getActivity(), "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         // Start LoginActivity
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
-                        Toast.makeText(getActivity(), "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
                         getActivity().finish();
                     }
                 });

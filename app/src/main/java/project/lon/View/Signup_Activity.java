@@ -215,7 +215,7 @@ public class Signup_Activity extends AppCompatActivity {
                         sDatabase = FirebaseDatabase.getInstance();
                         sReference = sDatabase.getReference("users").child("Email");
                         UserHelper userClass = new UserHelper(name, email, password, profile);
-                        sReference.child(name).setValue(userClass);
+                        sReference.child(user.getUid()).setValue(userClass);
                         Intent intent = new Intent(Signup_Activity.this, MainActivity.class);
                         startActivity(intent);
                         Toast.makeText(Signup_Activity.this, "Email đã được xác thực, đăng nhập ngay!", Toast.LENGTH_SHORT).show();

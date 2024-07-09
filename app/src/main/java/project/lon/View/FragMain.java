@@ -1,6 +1,7 @@
 package project.lon.View;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -59,7 +60,8 @@ public class FragMain extends Fragment {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
-//        setAvatar();
+        addEvents();
+        setAvatar();
         Picasso.get().load(urlDefault.toString()).into(imgAvatar);
         return view;
     }
@@ -85,5 +87,14 @@ public class FragMain extends Fragment {
             Picasso.get().load(urlDefault.toString()).into(imgAvatar);
 
         }
+    }
+    public void addEvents(){
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EditProfile.class);
+                startActivity(intent);
+            }
+        });
     }
 }
