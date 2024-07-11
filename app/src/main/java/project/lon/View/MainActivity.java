@@ -112,30 +112,67 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void firebaseAuth(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken,null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         pAuth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FirebaseUser user = pAuth.getCurrentUser();
-                            HashMap<String,Object> map = new HashMap<>();
-                            map.put("id", user.getUid());
-                            map.put("name", user.getDisplayName());
-                            map.put("profile", user.getPhotoUrl().toString());
-                            database.getReference().child("users").child("Google").child(user.getUid()).setValue(map);
-                            //
-                            SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("name", user.getDisplayName());
-                            editor.apply();
-                            //
-                            Toast.makeText(getApplicationContext(),"Đăng nhập thành công", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);
-                            startActivity(intent);
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child("Email");
+                            reference.orderByChild("email").equalTo(user.getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        // Email đã tồn tại
+                                        Toast.makeText(MainActivity.this, "Email đã được sử dụng ở phương thức khác", Toast.LENGTH_LONG).show();
+                                        pAuth.signOut();
+                                        googleSignInClient.signOut();
+                                    } else {
+                                        // Email chưa tồn tại, tiếp tục quá trình đăng nhập
+                                        DatabaseReference userRef = database.getReference().child("users").child("Google").child(user.getUid());
+                                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (!snapshot.exists()) {
+                                                    // Người dùng chưa tồn tại, tạo mục nhập mới
+                                                    HashMap<String, Object> map = new HashMap<>();
+                                                    map.put("email", user.getEmail());
+                                                    map.put("id", user.getUid());
+                                                    map.put("name", user.getDisplayName());
+                                                    map.put("profile", user.getPhotoUrl().toString());
+                                                    userRef.setValue(map);
+                                                }
+
+                                                // Lưu thông tin người dùng vào SharedPreferences
+                                                SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString("name", user.getDisplayName());
+                                                editor.apply();
+
+                                                // Hiển thị thông báo và chuyển đến Main_DesignMusic
+                                                Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Toast.makeText(MainActivity.this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(MainActivity.this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(MainActivity.this, "Có lỗi xảy ra khi đăng nhập", Toast.LENGTH_LONG).show();
                         }
-                        else
-                            Toast.makeText(MainActivity.this,"Something went wrong",Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -231,6 +268,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkUser() {
+        email = edt_Login_username.getText().toString().trim();
+        password = edt_Login_pass.getText().toString().trim();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child("Email");
         reference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -24,6 +24,7 @@
             android:textSize="15dp"
             android:textStyle="bold"
             android:text="Hủy"
+            android:textColor="@color/white"
             />
 
         <TextView
@@ -46,7 +47,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:textSize="15dp"
-            android:textColor="#80FFFFFF"
+            android:textColor="@color/white"
             android:text="Lưu"
             />
 
@@ -106,6 +107,7 @@
             android:textColorHint="#80FFFFFF"
             android:background="@null"
             android:layout_gravity="center"
+            android:paddingLeft="50dp"
             android:hint="Tên hoặc biệt danh" />
     </LinearLayout>
 
