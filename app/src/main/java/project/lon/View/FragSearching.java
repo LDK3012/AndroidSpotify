@@ -1,6 +1,7 @@
 package project.lon.View;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,7 +55,9 @@ public class FragSearching extends Fragment {
         lstView = view.findViewById(R.id.lstMusic);
         edtSearch = view.findViewById(R.id.edtSearch);
         imgAvatar = view.findViewById(R.id.imgAvatar);
-
+        //
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
             actionBar = activity.getSupportActionBar();
@@ -62,11 +66,41 @@ public class FragSearching extends Fragment {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
-        Picasso.get().load(urlDefault).into(imgAvatar);
-
+        addEvents();
+        setAvatar();
+        //Picasso.get().load(urlDefault.toString()).into(imgAvatar);
         return view;
     }
     public void addEvents(){
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EditProfile.class);
+                startActivity(intent);
+            }
+        });
+    }
 
+    private void setAvatar() {
+        firebaseUser = firebaseAuth.getCurrentUser();
+        // Check provider data to determine if it's Google or Facebook login
+        boolean isGoogle = false;
+        if (firebaseUser != null && firebaseUser.getProviderData() != null) {
+            for (com.google.firebase.auth.UserInfo userInfo : firebaseUser.getProviderData()) {
+                String providerId = userInfo.getProviderId();
+                if (providerId.equals("google.com")){
+                    isGoogle = true;
+                    break;
+                }
+            }
+        }
+
+        if (isGoogle) {
+            // Set avatar for Google or Facebook account
+            Picasso.get().load(firebaseUser.getPhotoUrl().toString()).into(imgAvatar);
+        } else {
+            Picasso.get().load(urlDefault.toString()).into(imgAvatar);
+
+        }
     }
 }

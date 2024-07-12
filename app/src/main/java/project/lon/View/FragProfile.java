@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import project.lon.R;
 import project.lon.View.EditProfile;
@@ -40,6 +44,11 @@ public class FragProfile extends Fragment {
     ListView lstView;
     Button btnEditProfile, btnLogout;
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseUser firebaseUser;
+    ImageView imgAvatar;
+    String urlDefault = "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +66,11 @@ public class FragProfile extends Fragment {
         btnEditProfile = view.findViewById(R.id.btnEdtProfile);
         btnLogout = view.findViewById(R.id.btnLogout);
         txtUsername = view.findViewById(R.id.txtUsername);
-        firebaseAuth = FirebaseAuth.getInstance();
+        imgAvatar = view.findViewById(R.id.imgAvatar);
         //
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
         // Lấy tên người dùng từ SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("name", "Chưa có tên");
@@ -72,10 +84,19 @@ public class FragProfile extends Fragment {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
+        //
+        setAvatar();
         addEvents();
         return view;
     }
     public void addEvents(){
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EditProfile.class);
+                startActivity(intent);
+            }
+        });
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,5 +148,28 @@ public class FragProfile extends Fragment {
                 dialog.show();
             }
         });
+    }
+
+    private void setAvatar() {
+        firebaseUser = firebaseAuth.getCurrentUser();
+        // Check provider data to determine if it's Google or Facebook login
+        boolean isGoogle = false;
+        if (firebaseUser != null && firebaseUser.getProviderData() != null) {
+            for (com.google.firebase.auth.UserInfo userInfo : firebaseUser.getProviderData()) {
+                String providerId = userInfo.getProviderId();
+                if (providerId.equals("google.com")){
+                    isGoogle = true;
+                    break;
+                }
+            }
+        }
+
+        if (isGoogle) {
+            // Set avatar for Google or Facebook account
+            Picasso.get().load(firebaseUser.getPhotoUrl().toString()).into(imgAvatar);
+        } else {
+            Picasso.get().load(urlDefault.toString()).into(imgAvatar);
+
+        }
     }
 }
