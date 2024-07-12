@@ -46,6 +46,9 @@ public class EditProfile extends AppCompatActivity {
         firebaseUser = mAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         userRef = firebaseDatabase.getReference().child("users").child("Google").child(firebaseUser.getUid());
+        //
+        addControls();
+        addEvents();
         // Lấy tên người dùng từ SharedPreferences và gán vào edtUsername
         SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
         String userName = sharedPreferences.getString("name", "");
@@ -70,8 +73,7 @@ public class EditProfile extends AppCompatActivity {
         });
         //
         setAvatar();
-        addControls();
-        addEvents();
+
     }
     public void addControls(){
         btnCancel = (Button) findViewById(R.id.btnCancel);

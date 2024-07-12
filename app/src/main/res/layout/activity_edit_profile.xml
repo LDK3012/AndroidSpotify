@@ -107,6 +107,7 @@
             android:textColorHint="#80FFFFFF"
             android:background="@null"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             android:paddingLeft="50dp"
             android:hint="Tên hoặc biệt danh" />
     </LinearLayout>

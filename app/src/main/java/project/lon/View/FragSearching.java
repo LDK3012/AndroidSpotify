@@ -37,13 +37,11 @@ public class FragSearching extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
-
     String urlDefault = "https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addEvents();
         }
 
     @SuppressLint("MissingInflatedId")
