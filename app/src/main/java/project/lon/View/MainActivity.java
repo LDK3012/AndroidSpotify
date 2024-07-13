@@ -150,6 +150,12 @@ public class MainActivity extends AppCompatActivity {
                                                 editor.putString("name", user.getDisplayName());
                                                 editor.apply();
 
+                                                // Lưu id của người dùng vào SharedPreferences để làm key cho danh sách nhạc yêu thích
+                                                SharedPreferences sharedPreferences1 = getSharedPreferences("idUser", MODE_PRIVATE);
+                                                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                                                editor1.putString("id", user.getUid());
+                                                editor1.apply();
+
                                                 // Hiển thị thông báo và chuyển đến Main_DesignMusic
                                                 Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);

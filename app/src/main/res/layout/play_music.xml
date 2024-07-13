@@ -96,6 +96,12 @@
                 android:scaleType="fitEnd"
                 android:src="@drawable/addbutton" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:visibility="gone" />
+
             <ImageButton
                 android:id="@+id/checked_button"
                 android:layout_width="35dp"

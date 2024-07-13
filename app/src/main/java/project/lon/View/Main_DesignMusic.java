@@ -26,12 +26,15 @@ public class Main_DesignMusic extends AppCompatActivity {
     FrameLayout frame;
     BottomNavigationView btnNav;
     ListView lstView;
+    MusicController musicController = new MusicController();
+    public String music;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_design_music);
+        music = "music";
         addControls();
         addEvents();
         loadFragment();
