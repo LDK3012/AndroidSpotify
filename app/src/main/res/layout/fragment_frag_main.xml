@@ -40,41 +40,82 @@
                     </ImageView>
 
                 </androidx.cardview.widget.CardView>
-
-                <Button
-                    android:id="@+id/btnAll"
+                <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:backgroundTint="#12CD31"
-                    android:text="Tất cả"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnMusic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:backgroundTint="#12CD31"
-                    android:text="Nhạc"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:text="Gợi ý thể loại nhạc"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"
-                android:textSize="20dp"
-                android:layout_gravity="center_horizontal"
-                android:text="Gợi ý thể loại nhạc" />
+                android:layout_gravity="center"
+
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_Wordout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:backgroundTint="@color/yellow"
+                    android:text="Word out"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_Topsong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+
+                    android:backgroundTint="@color/green"
+                    android:text="Top songs"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonVpop"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/blue"
+                android:textColor="@color/black"
+                android:text="Vpop"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_Relax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:text="Relax"
+                android:backgroundTint="@color/redgrown"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
 
             <ListView
                 android:id="@+id/lstMusic"

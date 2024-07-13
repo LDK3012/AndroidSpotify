@@ -52,8 +52,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
                     android:text="Searching"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
                     android:textStyle="bold|italic" />
 
@@ -67,11 +68,6 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/border">
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/search" />
 
                 <EditText
                     android:id="@+id/edtSearch"
@@ -81,7 +77,15 @@
                     android:layout_gravity="center_vertical"
                     android:textSize="15dp"
                     android:background="@null"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/black"
                     android:hint="What do you want to hear?" />
+
+                <ImageView
+                    android:id="@+id/search_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/search" />
             </LinearLayout>
 
             <ListView
