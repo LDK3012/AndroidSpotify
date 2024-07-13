@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="230dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_menu_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/avatar"/>
+        <Button
+            android:id="@+id/showArtist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:backgroundTint="@null"
+            android:paddingLeft="10dp"
+            android:gravity="fill"
+            android:text="Xem nghệ sĩ" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/share"
+            android:scaleX="-1"/>
+        <Button
+            android:id="@+id/shareSong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:backgroundTint="@null"
+            android:gravity="fill"
+            android:paddingLeft="10dp"
+            android:text="Chia sẻ bài hát" />
+    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="230dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:layout_marginTop="23dp"-->
+<!--        android:layout_marginRight="18dp"-->
+<!--        android:background="@drawable/popup_menu_bg"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/showArtist"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="#00000000"-->
+<!--            android:backgroundTint="@null"-->
+<!--            android:gravity="fill"-->
+<!--            android:paddingLeft="16dp"-->
+<!--            android:text="Xem nghệ sĩ" />-->
+
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="@color/white" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/shareSong"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="#00000000"-->
+<!--            android:backgroundTint="@null"-->
+<!--            android:gravity="fill"-->
+<!--            android:paddingLeft="16dp"-->
+<!--            android:text="Chia sẻ bài hát" />-->
+<!--    </LinearLayout>-->
+</LinearLayout>
