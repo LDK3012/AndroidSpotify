@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import project.lon.R;
 
@@ -31,6 +32,7 @@ public class EditProfile extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference userRef;
     FirebaseUser firebaseUser;
+    String urlDefault = "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png";
 
     boolean isUsernameChanged = false;
 
@@ -38,17 +40,19 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        addControls();
-        addEvents();
         Intent intent = getIntent();
         //
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         userRef = firebaseDatabase.getReference().child("users").child("Google").child(firebaseUser.getUid());
+        //
+        addControls();
+        addEvents();
         // Lấy tên người dùng từ SharedPreferences và gán vào edtUsername
         SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
         String userName = sharedPreferences.getString("name", "");
+        //
         edtUsername.setText(userName);
         edtUsername.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,6 +71,9 @@ public class EditProfile extends AppCompatActivity {
                 // Không cần làm gì ở đây
             }
         });
+        //
+        setAvatar();
+
     }
     public void addControls(){
         btnCancel = (Button) findViewById(R.id.btnCancel);
@@ -142,6 +149,29 @@ public class EditProfile extends AppCompatActivity {
     private void updateSaveButtonState() {
         btnSave.setEnabled(isUsernameChanged);
         btnSave.setAlpha(isUsernameChanged ? 1.0f : 0.5f);
+    }
+
+    private void setAvatar() {
+        firebaseUser = mAuth.getCurrentUser();
+        // Check provider data to determine if it's Google or Facebook login
+        boolean isGoogle = false;
+        if (firebaseUser != null && firebaseUser.getProviderData() != null) {
+            for (com.google.firebase.auth.UserInfo userInfo : firebaseUser.getProviderData()) {
+                String providerId = userInfo.getProviderId();
+                if (providerId.equals("google.com")){
+                    isGoogle = true;
+                    break;
+                }
+            }
+        }
+
+        if (isGoogle) {
+            // Set avatar for Google or Facebook account
+            Picasso.get().load(firebaseUser.getPhotoUrl().toString()).into(imgEditAvatar);
+        } else {
+            Picasso.get().load(urlDefault.toString()).into(imgEditAvatar);
+
+        }
     }
 
 }

@@ -140,8 +140,6 @@ public class FragMain extends Fragment {
                     break;
                 }
             }
-        }else{
-            Toast.makeText(getActivity(), "user null", Toast.LENGTH_SHORT).show();
         }
 
         if (isGoogle) {
