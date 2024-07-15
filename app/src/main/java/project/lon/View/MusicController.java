@@ -3,6 +3,7 @@ package project.lon.View;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -95,6 +96,11 @@ public class MusicController {
             fullPlayer();
             mainLayout = activity.findViewById(R.id.MainDesignMusic);
             mainLayout.addView(musicLayout);
+            // để trống vì mục đích là để hủy sự kiện click truyền lên Main_DesignMusic, không nên xóa hàm này
+            musicLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {}
+            });
 
             addControls(activity);
             addEvents(activity,musicObject);
@@ -172,14 +178,6 @@ public class MusicController {
             }
         });
 
-        shareSong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view_under_popup.setVisibility(View.GONE);
-                popupWindow.dismiss();
-            }
-        });
-
         btn_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,14 +206,14 @@ public class MusicController {
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
             }
         });
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
             }
         });
 
@@ -253,9 +251,7 @@ public class MusicController {
 
         sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -283,9 +279,7 @@ public class MusicController {
         final AnimationSet animationSet = (AnimationSet) AnimationUtils.loadAnimation(musicLayout.getContext(), R.anim.show_mini_player);
         animationSet.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
+            public void onAnimationStart(Animation animation) {}
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -303,9 +297,7 @@ public class MusicController {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
+            public void onAnimationRepeat(Animation animation) {}
         });
         musicLayout.startAnimation(animationSet);
     }
@@ -422,7 +414,6 @@ public class MusicController {
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -477,6 +468,25 @@ public class MusicController {
                                 add_id_btn.setVisibility(View.VISIBLE);
                             }
                         });
+            }
+        });
+
+        shareSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view_under_popup.setVisibility(View.GONE);
+                popupWindow.dismiss();
+
+                // Lấy nội dung cần chia sẻ
+                String content = musicObject.getPreview_url();
+
+                // Tạo Intent chia sẻ
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, content);
+
+                // Khởi chạy Activity chia sẻ
+                activity.startActivity(Intent.createChooser(shareIntent, "Share via"));
             }
         });
     }
