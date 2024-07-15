@@ -1,6 +1,7 @@
 package project.lon.View;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -52,7 +53,6 @@ public class FragSearching extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
-
     String urlDefault = "https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon";
     ArrayList<Music> lvDataMusic = new ArrayList<>();
     MusicAdapter musicAdapter;
@@ -61,7 +61,6 @@ public class FragSearching extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addEvents();
         }
 
     @SuppressLint("MissingInflatedId")
@@ -74,7 +73,6 @@ public class FragSearching extends Fragment {
         edtSearch = view.findViewById(R.id.edtSearch);
         imgAvatar = view.findViewById(R.id.imgAvatar);
         search_btn = view.findViewById(R.id.search_btn);
-
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
             actionBar = activity.getSupportActionBar();
@@ -90,11 +88,39 @@ public class FragSearching extends Fragment {
                 getData(edtSearch.getText().toString());
             }
         });
-
         return view;
     }
     public void addEvents(){
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EditProfile.class);
+                startActivity(intent);
+            }
+        });
+    }
 
+    private void setAvatar() {
+        firebaseUser = firebaseAuth.getCurrentUser();
+        // Check provider data to determine if it's Google or Facebook login
+        boolean isGoogle = false;
+        if (firebaseUser != null && firebaseUser.getProviderData() != null) {
+            for (com.google.firebase.auth.UserInfo userInfo : firebaseUser.getProviderData()) {
+                String providerId = userInfo.getProviderId();
+                if (providerId.equals("google.com")){
+                    isGoogle = true;
+                    break;
+                }
+            }
+        }
+
+        if (isGoogle) {
+            // Set avatar for Google or Facebook account
+            Picasso.get().load(firebaseUser.getPhotoUrl().toString()).into(imgAvatar);
+        } else {
+            Picasso.get().load(urlDefault.toString()).into(imgAvatar);
+
+        }
     }
 
     public void getData(String data){
