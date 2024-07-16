@@ -1,7 +1,7 @@
 package Models;
 
 public class UserHelper {
-    String name, email, password, profile;
+    String name, email, profile;
 
     public UserHelper(String name, String email, String profile) {
         this.name = name;

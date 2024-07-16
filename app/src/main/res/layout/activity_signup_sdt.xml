@@ -13,7 +13,7 @@
         android:layout_height="250px"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/edt_img" />
+        app:srcCompat="@drawable/Logo" />
 
 
 
