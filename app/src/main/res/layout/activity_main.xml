@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:layout_gravity="center"
     android:background="@color/black"
     tools:context=".View.MainActivity">
 
@@ -15,9 +16,8 @@
         android:id="@+id/img_music"
         android:layout_width="350px"
         android:layout_height="250px"
-
         android:layout_gravity="center"
-        app:srcCompat="@drawable/Logo" />
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView"
