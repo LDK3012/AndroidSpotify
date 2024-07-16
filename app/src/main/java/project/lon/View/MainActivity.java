@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+    // Đăng nhập bằng Google
     private void firebaseAuth(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         pAuth.signInWithCredential(credential)
@@ -155,6 +155,12 @@ public class MainActivity extends AppCompatActivity {
                                                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                                                 editor1.putString("id", user.getUid());
                                                 editor1.apply();
+
+                                                //Lưu phiên đăng nhập vào SharedPreferences
+                                                SharedPreferences sharedPreferences2 = getSharedPreferences("status_login", MODE_PRIVATE);
+                                                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                                                editor2.putString("name", "true");
+                                                editor2.apply();
 
                                                 // Hiển thị thông báo và chuyển đến Main_DesignMusic
                                                 Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
@@ -268,6 +274,9 @@ public class MainActivity extends AppCompatActivity {
         if (val.isEmpty()){
             Toast.makeText(this, "Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
             return false;
+        } else if (val.trim().isEmpty()) {
+            Toast.makeText(this, "Mật khẩu không được chứa khoảng trắng", Toast.LENGTH_SHORT).show();
+            return false;
         } else {
             return true;
         }
@@ -285,11 +294,20 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                SharedPreferences sharedPreferences = getSharedPreferences("status_login",MODE_PRIVATE);
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                String username = snapshot.child(user.getUid()).child("name").getValue(String.class);
+                                SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("name", "true");
+                                editor.putString("name", username);
                                 editor.apply();
                                 //
+
+                                SharedPreferences sharedPreference = getSharedPreferences("status_login",MODE_PRIVATE);
+                                SharedPreferences.Editor editor1 = sharedPreference.edit();
+                                editor1.putString("name", "true");
+                                editor1.apply();
+                                //
+
                                 Intent intent = new Intent(MainActivity.this, Main_DesignMusic.class);
                                 startActivity(intent);
                                 finish();

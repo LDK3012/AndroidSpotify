@@ -9,4 +9,11 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10%</item>
     </style>
+    <style name="BottomNavigationViewTextAppearance" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="BottomNavigationViewStyle" parent="Widget.Design.BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/BottomNavigationViewTextAppearance</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavigationViewTextAppearance</item>
+    </style>
 </resources>

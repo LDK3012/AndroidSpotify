@@ -30,7 +30,7 @@ public class EditProfile extends AppCompatActivity {
     EditText edtUsername;
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth mAuth;
-    DatabaseReference userRef;
+    DatabaseReference userRef, userRefs;
     FirebaseUser firebaseUser;
     String urlDefault = "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png";
 
@@ -46,9 +46,10 @@ public class EditProfile extends AppCompatActivity {
         firebaseUser = mAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         userRef = firebaseDatabase.getReference().child("users").child("Google").child(firebaseUser.getUid());
-        //
-        addControls();
-        addEvents();
+        userRefs = firebaseDatabase.getReference().child("users").child("Email").child(firebaseUser.getUid());
+         addControls();
+         addEvents();
+
         // Lấy tên người dùng từ SharedPreferences và gán vào edtUsername
         SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
         String userName = sharedPreferences.getString("name", "");
@@ -104,9 +105,22 @@ public class EditProfile extends AppCompatActivity {
                 editor.putString("name", newUsername);
                 editor.apply();
 
-                // Update the new username to Firebase Realtime Database
+                // Determine the provider and update the correct branch
+                boolean isGoogle = false;
+                if (firebaseUser != null && firebaseUser.getProviderData() != null) {
+                    for (com.google.firebase.auth.UserInfo userInfo : firebaseUser.getProviderData()) {
+                        String providerId = userInfo.getProviderId();
+                        if (providerId.equals("google.com")){
+                            isGoogle = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Update the new username to the correct Firebase Realtime Database branch
+                DatabaseReference correctUserRef = isGoogle ? userRef : userRefs;
                 if (firebaseUser != null) {
-                    userRef.child("name").setValue(newUsername).addOnCompleteListener(task -> {
+                    correctUserRef.child("name").setValue(newUsername).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Update the new username in Firebase Authentication
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -134,15 +148,15 @@ public class EditProfile extends AppCompatActivity {
 
     private void showConfirmationDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Confirm")
-                .setMessage("You have unsaved changes. Do you really want to cancel?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle("Cảnh báo")
+                .setMessage("Bạn có dữ liệu đang thay dổi.Có chắc chắn thoát?")
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton("Không", null)
                 .show();
     }
 
@@ -174,4 +188,12 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isUsernameChanged) {
+            showConfirmationDialog();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

@@ -8,6 +8,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +75,10 @@ public class FragSearching extends Fragment {
         edtSearch = view.findViewById(R.id.edtSearch);
         imgAvatar = view.findViewById(R.id.imgAvatar);
         search_btn = view.findViewById(R.id.search_btn);
+        //
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        //
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
             actionBar = activity.getSupportActionBar();
@@ -81,13 +87,9 @@ public class FragSearching extends Fragment {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
+        addEvents();
+        setAvatar();
         Picasso.get().load(urlDefault).into(imgAvatar);
-        search_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getData(edtSearch.getText().toString());
-            }
-        });
         return view;
     }
     public void addEvents(){
@@ -98,11 +100,18 @@ public class FragSearching extends Fragment {
                 startActivity(intent);
             }
         });
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getData(edtSearch.getText().toString());
+            }
+        });
     }
 
     private void setAvatar() {
         firebaseUser = firebaseAuth.getCurrentUser();
-        // Check provider data to determine if it's Google or Facebook login
+        // Check provider data to determine if it's Google login
         boolean isGoogle = false;
         if (firebaseUser != null && firebaseUser.getProviderData() != null) {
             for (com.google.firebase.auth.UserInfo userInfo : firebaseUser.getProviderData()) {
@@ -113,7 +122,6 @@ public class FragSearching extends Fragment {
                 }
             }
         }
-
         if (isGoogle) {
             // Set avatar for Google or Facebook account
             Picasso.get().load(firebaseUser.getPhotoUrl().toString()).into(imgAvatar);
@@ -138,7 +146,7 @@ public class FragSearching extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Lỗi data", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Không tìm thấy bài hát, nghệ sĩ đó", Toast.LENGTH_LONG).show();
             }
         });
 

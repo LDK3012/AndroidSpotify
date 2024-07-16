@@ -23,9 +23,11 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btnNav"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:layout_gravity="bottom"
             android:background="#27282E"
+            app:itemTextAppearanceActive="@style/BottomNavigationViewTextAppearance"
+            app:itemTextAppearanceInactive="@style/BottomNavigationViewTextAppearance"
             app:itemTextColor="@color/white"
             app:menu="@menu/bottom_menu"
             tools:ignore="InvalidID,MissingConstraints">

@@ -2,6 +2,7 @@ package project.lon.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -208,6 +209,14 @@ public class Signup_Activity extends AppCompatActivity {
                         sReference = sDatabase.getReference("users").child("Email");
                         UserHelper userClass = new UserHelper(name, email, profile);
                         sReference.child(user.getUid()).setValue(userClass);
+
+                        // Lưu tên người dùng vào SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("name", name);
+                        editor.apply();
+                        //
+
                         Intent intent = new Intent(Signup_Activity.this, MainActivity.class);
                         startActivity(intent);
                         Toast.makeText(Signup_Activity.this, "Email đã được xác thực, đăng nhập ngay!", Toast.LENGTH_SHORT).show();

@@ -71,11 +71,16 @@ public class FragProfile extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        // Lấy tên người dùng từ SharedPreferences
+        // Lấy tên người dùng từ SharedPreferences khi đăng nhập google
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("name", "Chưa có tên");
+        String usernameGoogle = sharedPreferences.getString("name", "Chưa có tên");
+        txtUsername.setText(usernameGoogle);
+
+        // Lấy tên người dùng từ SharedPreferences khi đăng nhập email
+        SharedPreferences sharedPreference = getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String username = sharedPreference.getString("name", "Chưa có tên");
         txtUsername.setText(username);
-        //
+
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
             actionBar = activity.getSupportActionBar();

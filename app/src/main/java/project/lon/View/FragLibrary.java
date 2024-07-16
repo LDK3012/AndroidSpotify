@@ -92,21 +92,24 @@ public class FragLibrary extends Fragment {
 
     private void loadListView(ArrayList<Music> lvDataMusic)
     {
-        MusicAdapter musicAdapter = new MusicAdapter(getContext(), R.layout.layout_item_albums, lvDataMusic);
-        lst_Music.setAdapter(musicAdapter);
-        lst_Music.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Music music = (Music) adapterView.getItemAtPosition(position);
-                if(music.getPreview_url().toString().equals("null"))
-                {
-                    Toast.makeText(getContext(), "Nhạc tạm thời bị xóa", Toast.LENGTH_SHORT).show();
+        if(getContext()!=null)
+        {
+            MusicAdapter musicAdapter = new MusicAdapter(getContext(), R.layout.layout_item_albums, lvDataMusic);
+            lst_Music.setAdapter(musicAdapter);
+            lst_Music.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    Music music = (Music) adapterView.getItemAtPosition(position);
+                    if(music.getPreview_url().toString().equals("null"))
+                    {
+                        Toast.makeText(getContext(), "Nhạc tạm thời bị xóa", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Main_DesignMusic mainDesignMusic = (Main_DesignMusic) getActivity();
+                        mainDesignMusic.musicController.addViewPlayMusic(getActivity(),(Music) adapterView.getItemAtPosition(position));
+                    }
                 }
-                else{
-                    Main_DesignMusic mainDesignMusic = (Main_DesignMusic) getActivity();
-                    mainDesignMusic.musicController.addViewPlayMusic(getActivity(),(Music) adapterView.getItemAtPosition(position));
-                }
-            }
-        });
+            });
+        }
     }
 }

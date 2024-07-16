@@ -76,7 +76,9 @@
             android:textSize="15dp"
             android:textColor="@color/black"
             android:ellipsize="end"
-            android:maxLines="1"/> <!-- Giới hạn số dòng tối đa là 1 -->
+            android:inputType="textEmailAddress"
+            >
+        </EditText>
 
 
 
