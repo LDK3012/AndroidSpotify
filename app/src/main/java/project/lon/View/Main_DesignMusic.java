@@ -16,10 +16,8 @@ import android.widget.ListView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import Controls.MusicController;
 import project.lon.R;
-import project.lon.View.FragMain;
-import project.lon.View.FragProfile;
-import project.lon.View.FragSearching;
 
 public class Main_DesignMusic extends AppCompatActivity {
     ActionBar actionBar;

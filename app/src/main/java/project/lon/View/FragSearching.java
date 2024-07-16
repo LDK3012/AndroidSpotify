@@ -2,7 +2,6 @@ package project.lon.View;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -37,6 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import Controls.MusicAdapter;
 import Models.Music;
 import project.lon.R;
 

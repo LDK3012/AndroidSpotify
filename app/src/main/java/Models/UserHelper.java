@@ -1,4 +1,4 @@
-package project.lon.View;
+package Models;
 
 public class UserHelper {
     String name, email, password, profile;

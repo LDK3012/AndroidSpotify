@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+import Controls.MusicAdapter;
 import Models.Music;
 import project.lon.R;
 

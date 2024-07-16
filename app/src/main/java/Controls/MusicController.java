@@ -1,4 +1,4 @@
-package project.lon.View;
+package Controls;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -56,7 +56,6 @@ import Models.Music;
 import project.lon.R;
 
 public class MusicController {
-
     ImageView imageSong, imageMiniSong;
     ImageButton vertical_dots_btn, btn_down,checked_button, add_id_btn;
     Button showArtist, shareSong;
