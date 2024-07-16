@@ -49,7 +49,7 @@ public class FragSearching extends Fragment {
     BottomNavigationView btnNav;
     ListView lstView;
     EditText edtSearch;
-    ImageButton imgAvatar;
+    ImageView imgAvatar;
     ImageView search_btn;
 
     FirebaseAuth firebaseAuth;
@@ -89,7 +89,6 @@ public class FragSearching extends Fragment {
         }
         addEvents();
         setAvatar();
-        Picasso.get().load(urlDefault).into(imgAvatar);
         return view;
     }
     public void addEvents(){
